@@ -6,6 +6,7 @@ import BottomNav from '../components/BottomNav/BottomNav';
 import SectionRow from '../components/SectionRow/SectionRow';
 import TrendingAnimes from '../components/TrendingAnimes';
 import styles from './HomeScreen.style';
+import { Image } from 'react-native';
 
 interface Anime {
   id: string;
@@ -108,10 +109,61 @@ const HomeScreen: React.FC = () => {
         <View style={{ marginBottom: 32 }}>
           <TrendingAnimes />
         </View>
+        {/* Bloco de filmes Crunchyroll Brasil */}
+        <View style={{ marginBottom: 32 }}>
+          <Text style={[styles.header, { fontSize: 22, marginBottom: 0 }]}>Filmes já disponíveis na Crunchyroll Brasil!</Text>
+          <Text style={{ color: '#f3efefff', marginLeft: 16, marginBottom: 8, fontSize: 14 }}>Pegue a pipoca!</Text>
+          <FlatList
+            data={filmes}
+            keyExtractor={item => item.id}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{ paddingHorizontal: 8 }}
+            renderItem={({ item }) => (
+              <View style={{ width: 160, marginRight: 16 }}>
+                <Image source={item.image} style={{ width: 160, height: 220, borderRadius: 8, marginBottom: 8, backgroundColor: '#222' }} resizeMode="cover" />
+                <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 15, marginBottom: 2 }}>{item.title}</Text>
+                <Text style={{ color: '#ccc', fontSize: 12 }}>{item.subtitle}</Text>
+              </View>
+            )}
+          />
+        </View>
       </ScrollView>
       <BottomNav />
     </View>
   );
 };
 
+const filmes = [
+  {
+    id: 'f1',
+    title: 'Dragon Ball (Filmes)',
+    image: require('../../assets/animes/dragonball.png'), // Troque para o poster correto
+    subtitle: 'Leg | Dub',
+  },
+  {
+    id: 'f2',
+    title: 'SPY x FAMILY',
+    image: require('../../assets/animes/spy.png'), // Troque para o poster correto
+    subtitle: 'Leg | Dub',
+  },
+  {
+    id: 'f3',
+    title: 'Attack on Titan',
+    image: require('../../assets/animes/titan.png'),
+    subtitle: 'Leg | Dub',
+  },
+  {
+    id: 'f4',
+    title: 'Bungo Stray Dogs',
+    image: require('../../assets/animes/jujutsu.png'), // Troque para o poster correto
+    subtitle: 'Leg | Dub',
+  },
+  {
+    id: 'f5',
+    title: 'Code Geass',
+    image: require('../../assets/animes/slime.png'), // Troque para o poster correto
+    subtitle: 'Leg | Dub',
+  },
+];
 export default HomeScreen;
