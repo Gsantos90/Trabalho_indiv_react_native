@@ -103,26 +103,40 @@ const BannerCarousel: React.FC = () => {
         {banners.map((item) => (
           <View key={item.id} style={[styles.banner, { width: width }]}> 
             <Image source={item.image} style={styles.image} resizeMode="cover" />
+            {/* Gradiente superior para contraste */}
+            <LinearGradient
+              colors={["rgba(0,0,0,0.7)", "transparent"]}
+              style={styles.topGradient}
+            />
+            {/* Gradiente inferior para destaque do texto */}
+            <LinearGradient
+              colors={["transparent", "rgba(0,0,0,0.85)"]}
+              style={styles.bottomGradient}
+            />
+            {/* Ícone Crunchyroll no topo esquerdo */}
             <Image
               source={{ uri: 'https://img.icons8.com/color/48/crunchyroll.png' }}
               style={styles.brandIcon}
             />
-            <LinearGradient
-              colors={["rgba(0,0,0,0.6)", "transparent"]}
-              style={styles.topGradient}
-            />
-            <LinearGradient
-              colors={["transparent", "rgba(0,0,0,0.6)"]}
-              style={styles.bottomGradient}
-            />
+            {/* Bloco de informações sobre o anime */}
             <View style={styles.overlay} pointerEvents="none">
-              <Text style={styles.title}>{item.title}</Text>
-              <Text style={styles.desc} numberOfLines={2} ellipsizeMode="tail">
+              <Text style={styles.bannerTitle}>{item.title}</Text>
+              <View style={styles.infoRow}>
+                <View style={styles.ratingBox}><Text style={styles.ratingText}>A16</Text></View>
+                <Text style={styles.infoText}>Dub Português | Leg Português</Text>
+                <Text style={styles.infoText}>• Action, Fantasy, Drama</Text>
+              </View>
+              <Text style={styles.desc} numberOfLines={3} ellipsizeMode="tail">
                 {item.description}
               </Text>
-              <TouchableOpacity style={styles.button} onPress={() => {}}>
-                <Text style={styles.buttonText}>{item.button}</Text>
-              </TouchableOpacity>
+              <View style={styles.buttonRow}>
+                <TouchableOpacity style={styles.button} onPress={() => {}}>
+                  <Text style={styles.buttonText}>▶ {item.button}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.bookmarkBtn} onPress={() => {}}>
+                  <Text style={styles.bookmarkIcon}>🔖</Text>
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
         ))}
@@ -163,11 +177,55 @@ const styles = StyleSheet.create({
     top: 92,
     right: 20,
   },
-  title: {
-    color: '#ff8000',
-    fontSize: 28,
+  bannerTitle: {
+    color: '#ff2d00',
+    fontSize: 34,
     fontWeight: 'bold',
+    letterSpacing: 2,
     marginBottom: 8,
+    textShadowColor: '#000',
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 6,
+  },
+  infoRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 6,
+    gap: 8,
+  },
+  ratingBox: {
+    backgroundColor: '#ff2d00',
+    borderRadius: 4,
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+    marginRight: 6,
+  },
+  ratingText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 12,
+  },
+  infoText: {
+    color: '#fff',
+    fontSize: 12,
+    marginRight: 8,
+  },
+  buttonRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 12,
+  },
+  bookmarkBtn: {
+    marginLeft: 12,
+    borderWidth: 2,
+    borderColor: '#ff8000',
+    borderRadius: 8,
+    padding: 6,
+    backgroundColor: 'rgba(0,0,0,0.2)',
+  },
+  bookmarkIcon: {
+    fontSize: 22,
+    color: '#ff8000',
   },
   desc: {
     color: '#fff',

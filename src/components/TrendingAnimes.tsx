@@ -30,7 +30,7 @@ const animes: Anime[] = [
   },
   {
     id: '4',
-    title: 'JUJUTSU KAISEN',
+    title: 'Jujutsu Kaisen',
     image: require('../../assets/animes/jujutsu.png'),
     subtitle: 'Leg | Dub',
   },
